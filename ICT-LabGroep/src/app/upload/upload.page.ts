@@ -21,6 +21,7 @@ export class UploadPage  {
 
             let sampleObj = [
               {
+                image:"../assets/images/img1.jpg",
                 time:"3-5",
                 price: "129.99",
                 description: "SPEEDGATE XENTRY 2",
@@ -28,6 +29,7 @@ export class UploadPage  {
                 productnr: "257.255.3201",
                 stock: "Ja"
               }, {
+                image:'assets/images/img2.jpg',
                 time:"3-5",
                 price: "239.99",
                 description: "Xentry Speedgate High Security",
@@ -35,6 +37,7 @@ export class UploadPage  {
                 productnr: "1-868-497-5043 x73289",
                 stock: "Ja"
               }, {
+                image:'assets/images/img3.jpg',
                 time:"onbekend",
                 price: "499.99",
                 description: "Speedgate Xentry Mobile",
