@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UploadPage } from './upload.page';
+import { UploadPage } from './upload2.page';
 
 const routes: Routes = [
   {

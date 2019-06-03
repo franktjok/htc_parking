@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from '../config';
 import { AuthService } from '../services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +32,7 @@ export function LanguageLoader(http: HttpClient) {
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(firebaseConfig.fire), FormsModule, ReactiveFormsModule, NgxErrorsModule, IonicStorageModule.forRoot(),HttpClientModule,TranslateModule.forRoot({
+  imports: [BrowserModule, FormsModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(firebaseConfig.fire), FormsModule, ReactiveFormsModule, AngularFirestoreModule, AngularFireDatabaseModule, NgxErrorsModule, IonicStorageModule.forRoot(),HttpClientModule,TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
       useFactory: (LanguageLoader),
