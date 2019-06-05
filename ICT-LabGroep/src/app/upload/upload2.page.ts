@@ -16,8 +16,8 @@ export class UploadPage implements OnInit {
       description: string;
       specification: string;
       productnr: string;
-      stock : string;
-      image: string;
+      stock: string;
+
 
   constructor(private crudService: CrudService) {}
 
