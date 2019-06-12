@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage'
 import { CrudService } from './../../services/crud.service'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-upload',
@@ -17,9 +21,9 @@ export class UploadPage implements OnInit {
       specification: string;
       productnr: string;
       stock : string;
-      image: string;
+      isAdmin = false;
 
-  constructor(private crudService: CrudService) {}
+  constructor(private crudService: CrudService, private fireStore: AngularFirestore) {}
 
   ngOnInit() {
       this.crudService.read_Products().subscribe(data => {
@@ -40,6 +44,19 @@ export class UploadPage implements OnInit {
         console.log(this.products);
 
       });
+
+       firebase.auth().onAuthStateChanged(user => {
+       if (user){
+            firebase
+                .firestore()
+                .doc(`/userProfile/${user.uid}`)
+                .get()
+                .then(userProfileSnapshot => {
+                    this.isAdmin = userProfileSnapshot.data().isAdmin;
+                    });
+        }
+       });
+
     }
 
   CreateRecord() {
