@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar>   
+  <ion-buttons>
+  <ion-menu-button></ion-menu-button>
+  <ion-title>HTC Product List </ion-title>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="titleicon">
+  <img src="assets/images/logo.png" width="150px" />
+</div>
+<ion-content padding>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Enter ProductID" [(ngModel)]="productnr"></ion-input>
+        </ion-item>
+      </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Enter Price" [(ngModel)]="price"></ion-input>
+        </ion-item>
+      </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Enter Description" [(ngModel)]="description"></ion-input>
+        </ion-item>
+      </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Enter Specification" [(ngModel)]="specification"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Enter Time" [(ngModel)]="time"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Enter Stock" [(ngModel)]="stock"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Enter Image" [(ngModel)]="image"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-button (click)="CreateRecord()" [disabled]="!productnr || !price || !description || !specification || !time || !stock">
+          <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
+          &nbsp;Product Toevoegen
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-card *ngFor="let item of products">
+    <span *ngIf="!item.isEdit; else elseBlock">
+      <img [src]='item.Image'/>
+      <ion-card-header>
+        <ion-card-title>{{item.Description}}</ion-card-title>
+        <ion-card-subtitle>ProductID: {{item.ProductId}}</ion-card-subtitle>
+        <ion-card-subtitle>Prijs: {{item.Price}}</ion-card-subtitle>
+        <ion-card-subtitle>Specification: {{item.Specification}}</ion-card-subtitle>
+        <ion-card-subtitle>Stock: {{item.Stock}}</ion-card-subtitle>
+        <ion-card-subtitle>Levertijd: {{item.Time}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+          <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
+
+        </ion-button>
+        <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+          <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
+
+        </ion-button>
+      </ion-card-content>
+    </span>
+    <ng-template #elseBlock>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Edit
+              </ion-col>
+              <ion-col>
+                <ion-button fill="clear" color="medium" size="small" (click)="item.isEdit = false">
+                  Cancel
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button fill="outline" color="success" size="small" (click)="UpdateRecord(item)">
+                  Update
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label><strong>ProductId</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditProdId"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Price</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditPrice"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Description</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditDescription"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Specification</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditSpecification"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Time</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditTime"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Stock</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditStock"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ng-template>
+  </ion-card>
+
+<!--
+  <ion-button size="small" (click)="driverUsed()">Get Storage Driver Used</ion-button>
+  <ion-button size="small" (click)="traverseKeys()">Loop through All Stored Keys</ion-button>
+  <ion-button size="small" (click)="listKeys()">Get Stored Keys</ion-button>
+  <ion-button size="small" (click)="getKeyLength()">Get Length Stored Keys</ion-button>-->
+
+
+</ion-content>
