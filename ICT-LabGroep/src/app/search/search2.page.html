@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-menu-button></ion-menu-button>
+      <ion-title><img class="title-image" alt="logo" height="100" src="/assets/images/logo.png" >Search Product </ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="titleicon">
+  <img src="assets/images/logo.png" width="150px" />
+</div>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Product ID</ion-label>
+      <ion-input type="text" [(ngModel)]="ProductId"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Description</ion-label>
+      <ion-input type="text" [(ngModel)]="Description"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block (click)="createProject(ProductId, Description)">
+    Create Product
+  </button>
+
+  <p>
+    The product's name is {{ myProject.ProductId }} {{ myProject.Description }}
+  </p>
+</ion-content>

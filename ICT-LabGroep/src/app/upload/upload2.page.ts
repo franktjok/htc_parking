@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage'
+import { Storage} from '@ionic/storage'
 import { CrudService } from './../../services/crud.service'
+import { DataService } from './../../services/data.service'
+import { AlertController, PopoverController, NavController  } from '@ionic/angular';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Router, NavigationExtras } from '@angular/router';
+import { Observable } from "rxjs/Observable";
+import { Events } from '@ionic/angular';
+import { CartPage } from './../cart/cart.page';
 
 @Component({
   selector: 'app-upload',
@@ -17,9 +27,11 @@ export class UploadPage implements OnInit {
       specification: string;
       productnr: string;
       stock : string;
-      image: string;
+      isAdmin = false;
+      cart = [];
 
-  constructor(private crudService: CrudService) {}
+
+  constructor(private crudService: CrudService, private fireStore: AngularFirestore, private popoverCtrl: PopoverController, private router: Router, public events:Events, public navCtrl: NavController, private data: DataService) {}
 
   ngOnInit() {
       this.crudService.read_Products().subscribe(data => {
@@ -40,7 +52,70 @@ export class UploadPage implements OnInit {
         console.log(this.products);
 
       });
+
+       firebase.auth().onAuthStateChanged(user => {
+       if (user){
+            firebase
+                .firestore()
+                .doc(`/userProfile/${user.uid}`)
+                .get()
+                .then(userProfileSnapshot => {
+                    this.isAdmin = userProfileSnapshot.data().isAdmin;
+                    });
+        }
+       });
+
+       //this.cart = this.crudService.getCart();
     }
+
+
+
+  async addProjects(ev: any) {
+        const popover = await this.popoverCtrl.create({
+            component: UploadPage,
+            event: ev,
+            animated: true,
+            showBackdrop: true
+        });
+        return await popover.present();
+    }
+
+  getProducts(){
+  return this.products;
+  }
+
+  getCart()
+  {
+  return this.cart;
+  console.log(this.cart);
+  }
+
+  addProduct(item)
+  {
+    this.cart.push(item);
+    console.log(item);
+   console.log(this.cart);
+
+
+  }
+
+  addToCart(product)
+  {
+    console.log(product);
+    this.addProduct(product);
+    //this.events.publish(product);
+    //this.navCtrl.navigateForward(product);
+
+  }
+
+  openCart() {
+      this.data.storage = this.cart;
+      console.log(this.data.storage);
+      this.router.navigate(['cart']);
+
+    }
+
+
 
   CreateRecord() {
       let record = {};
