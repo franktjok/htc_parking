@@ -34,6 +34,7 @@ export class UploadPage implements OnInit {
   constructor(private crudService: CrudService, private fireStore: AngularFirestore, private popoverCtrl: PopoverController, private router: Router, public events:Events, public navCtrl: NavController, private data: DataService) {}
 
   ngOnInit() {
+      // ophalen producten
       this.crudService.read_Products().subscribe(data => {
 
         this.products = data.map(e => {
@@ -52,7 +53,7 @@ export class UploadPage implements OnInit {
         console.log(this.products);
 
       });
-
+    //  isAdmin
        firebase.auth().onAuthStateChanged(user => {
        if (user){
             firebase

@@ -10,14 +10,12 @@
   </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<!--<div class="titleicon">
-  <img src="assets/images/logo.png" width="150px" />
-</div>-->
+<!--button alleen voor admin-->
 <ion-content padding>
   <ion-button *ngIf="isAdmin" expand="block" routerLink="/add-product" routerDirection="root">
     &nbsp;Product Toevoegen
   </ion-button>
-
+  <!--productlijst-->
     <ion-card *ngFor="let item of products">
     <span *ngIf="!item.isEdit; else elseBlock">
       <img [src]='item.Image'/>
