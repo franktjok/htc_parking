@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class CrudService {
-
+    private cart = [];
   constructor(
     private firestore: AngularFirestore
   ) { }
@@ -26,5 +26,13 @@ export class CrudService {
 
   delete_Product(record_id) {
     this.firestore.doc('Products/' + record_id).delete();
+  }
+
+  getCart() {
+      return this.cart;
+    }
+
+  addProduct(record_id){
+    this.cart.push(record_id);
   }
 }

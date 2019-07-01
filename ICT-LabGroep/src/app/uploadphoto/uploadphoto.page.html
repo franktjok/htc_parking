@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title><img class="title-image" alt="logo" height="100" src="/assets/images/logo.png" >NIEUW PRODUCT IMAGE</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card>
+    <img [src]="captureDataUrl" *ngIf="captureDataUrl"/>
+    <button ion-button (click)="upload()" *ngIf="captureDataUrl">Upload to Firebase!</button>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+
+  <ion-toolbar text-center="" color="dark">
+    <ion-buttons>
+      <ion-button fill="clear" expand="full" color="light" (click)="pickImage()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Take Photo</ion-button>
+      <ion-button fill="clear" expand="full" color="light" (click)="getPicture(0)">
+        <ion-icon slot="end" name="md-cloud-upload"></ion-icon>
+        Open Album</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -2,76 +2,21 @@
   <ion-toolbar>   
   <ion-buttons>
   <ion-menu-button></ion-menu-button>
-  <ion-title>HTC Product List </ion-title>
+  <ion-title><img class="title-image" alt="logo" height="100" src="/assets/images/logo.png" >HTC Product List </ion-title>
+    <ion-button (click)="openCart()">
+      <ion-badge *ngIf="cart.length > 0">{{ cart.length }}</ion-badge>
+      <ion-icon slot="icon-only" name="cart"></ion-icon>
+    </ion-button>
   </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<div class="titleicon">
-  <img src="assets/images/logo.png" width="150px" />
-</div>
+<!--button alleen voor admin-->
 <ion-content padding>
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-input placeholder="Enter ProductID" [(ngModel)]="productnr"></ion-input>
-        </ion-item>
-      </ion-col>
-      </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-input placeholder="Enter Price" [(ngModel)]="price"></ion-input>
-        </ion-item>
-      </ion-col>
-      </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-input placeholder="Enter Description" [(ngModel)]="description"></ion-input>
-        </ion-item>
-      </ion-col>
-      </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-input placeholder="Enter Specification" [(ngModel)]="specification"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-input placeholder="Enter Time" [(ngModel)]="time"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-input placeholder="Enter Stock" [(ngModel)]="stock"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-input placeholder="Enter Image" [(ngModel)]="image"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <ion-button (click)="CreateRecord()" [disabled]="!productnr || !price || !description || !specification || !time || !stock">
-          <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
-          &nbsp;Product Toevoegen
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-
-  <ion-card *ngFor="let item of products">
+  <ion-button *ngIf="isAdmin" expand="block" routerLink="/add-product" routerDirection="root">
+    &nbsp;Product Toevoegen
+  </ion-button>
+  <!--productlijst-->
+    <ion-card *ngFor="let item of products">
     <span *ngIf="!item.isEdit; else elseBlock">
       <img [src]='item.Image'/>
       <ion-card-header>
@@ -85,15 +30,18 @@
 
       <ion-card-content>
 
-        <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+        <ion-button *ngIf="isAdmin" shape="round" color="secondary" size="small" (click)="EditRecord(item)">
           <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
 
         </ion-button>
-        <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+        <ion-button *ngIf="isAdmin" shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
           <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
 
         </ion-button>
-      </ion-card-content>
+        <ion-button  shape="round" slot= "end" color="danger" size="small" (click)="addToCart(item)">
+          <ion-icon size="small" slot="icon-only"  name="cart" ></ion-icon>
+
+        </ion-button></ion-card-content>
     </span>
     <ng-template #elseBlock>
       <ion-card-header>

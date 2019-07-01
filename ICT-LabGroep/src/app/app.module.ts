@@ -25,13 +25,21 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateConfigService } from '../services/translate-config.service';
 
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+
+import { PopupComponent } from './popup/popup.component';
+import { UploadphotoPage } from './uploadphoto/uploadphoto.page'
+import { UploadPage } from './upload/upload2.page'
+
 export function LanguageLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, PopupComponent,UploadphotoPage],
+  entryComponents: [PopupComponent,UploadphotoPage],
   imports: [BrowserModule, FormsModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(firebaseConfig.fire), FormsModule, ReactiveFormsModule, AngularFirestoreModule, AngularFireDatabaseModule, NgxErrorsModule, IonicStorageModule.forRoot(),HttpClientModule,TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
@@ -43,6 +51,10 @@ export function LanguageLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+     Camera,
+        File,
+        FilePath,
+        UploadPage,
     AngularFireAuth,
     AuthService,
   ],

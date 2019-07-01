@@ -18,7 +18,9 @@ export class AppComponent {
     {title: 'Home', url: '/home', icon: 'list'},
     {title: 'Product', url: '/upload', icon: 'add'},
     {title: 'Search Product', url: '/search', icon: 'add'},
-    /**{title: 'Member', url: '/user', icon: 'contact'}**/
+    /**{title: 'Cart', url: '/cart', icon: 'add'},**/
+    /**{title: 'Photo', url: '/uploadphoto', icon: 'contact'}**/
+
 
   ]
   @ViewChild(NavController) nav: NavController;
