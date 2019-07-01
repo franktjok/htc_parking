@@ -31,6 +31,7 @@ export class UploadPage implements OnInit {
       cart = [];
 
 
+
   constructor(private crudService: CrudService, private fireStore: AngularFirestore, private popoverCtrl: PopoverController, private router: Router, public events:Events, public navCtrl: NavController, private data: DataService) {}
 
   ngOnInit() {
